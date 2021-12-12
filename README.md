@@ -22,7 +22,7 @@ In the decentralized federated learning setting, the nodes are able to coordinat
      ```bash
    python Centralized_sequential.py
     ```
-4. Run the Parallel model 
+4. Run the Parallel model with MPI
      ```bash
    mpirun -n 2 python Centralized_MPI.py
     ```
