@@ -4,9 +4,37 @@ This is the Parallel Programming Project using MPI4PY in the Federated Learning 
 In the centralized federated learning setting, a central server is used to orchestrate the different steps of the algorithms and coordinate all the participating nodes during the learning process. The server is responsible for the nodes selection at the beginning of the training process and for the aggregation of the received model updates. Since all the selected nodes have to send updates to a single entity, the server may become a bottleneck of the system.
 ![Federated_learning_process_central_case](https://user-images.githubusercontent.com/53828158/145125741-a438e4cf-2519-476b-88f1-316c0df14aac.png)
 
-In the decentralized federated learning setting, the nodes are able to coordinate themselves to obtain the global model. This setup prevents single point failures as the model updates are exchanged only between interconnected nodes without the orchestration of the central server. Nevertheless, the specific network topology may affect the performances of the learning process. 
+# Idea of Centralized Federated Learning In Parallel
 
-![Decentralized-Federated-Learning-Environments](https://user-images.githubusercontent.com/53828158/145125956-70d59c9e-6f66-4dee-8b8f-d0a1d592f79f.png)
+1. The Master process read a data set.
+
+2. The Master process will scatter all dataset divided by number of processes to each process.
+
+3. Master process will broadcast the newest weight of model to each process.
+
+4. Each process produces updates to the model parameters based on their individual datasets.
+
+5. Each process then send their client-model updates back to the Master.
+
+6. The Master process aggregates the updates to produce an updated version of the global model.
+
+7. The Master process then broadcast the new version to all processes, and the entire pro- cess repeats itself until convergence.
+
+<img width="567" alt="Screen Shot 2022-08-04 at 3 52 45 PM" src="https://user-images.githubusercontent.com/53828158/182864234-8fef7cf1-e688-401d-8064-8af702b34ba3.png">
+
+## Tasks in Concurrency
++ 3rd Task: Each Process produces updates to the model parameters based on their indi- vidual datasets.
+
++ 4th Task: The processes then send their client-model updates back to the central server (Master process).
+
+## Tasks in Sequence:
++ 1st Task: Master process splits data based on division of the amount of data to the number of processes.
+
++ 2nd Task: Scatter data and broadcast data to each process before doing parallel.
+
++ 5th Task: Master process aggregates the updates to produce an updated version of the global model.
+
++ 6th Task: The Master process then broadcast the new version of weight to the client devices, and the entire steps repeat itself until convergence.
 
 # Installation
 1. Clone repo
